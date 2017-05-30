@@ -1,0 +1,60 @@
+.root{
+	-fx-background-color: #003d35;
+}
+
+#popup{
+	-fx-background-color: #F0FFFF;
+	-fx-border-color: grey;
+	-fx-border-width: 5px;
+}
+
+#okButton{
+	-fx-background-color: #6495ED;
+	-fx-text-fill: #F0FFFF;
+}
+
+#popLabel{
+	-fx-text-alignment: center;
+	-fx-text-fill: #2F4F4F;
+	-fx-font-weight: bold;
+	-fx-font-size: 25px;
+	-fx-padding: 30px;
+}
+
+.label{
+	-fx-text-fill: #F0F8FF;
+	-fx-font-weight: bold;
+	-fx-font-size: 20px;
+}
+
+.button{
+	-fx-background-color: #00ffdd;
+	-fx-text-fill:  #00ffdd;
+}
+
+.button:hover{
+	-fx-background-color: #00ddbb;
+	-fx-text-fill:  #00ddbb;
+}
+
+.ship{
+	-fx-background-color: purple;
+	-fx-text-fill: purple;
+}
+
+#MISSED{
+	-fx-background-color: orange;
+	-fx-text-fill: orange;
+}
+
+#ENEMYHIT{
+	-fx-background-color: red;
+	-fx-text-fill: red;
+}
+
+#HIT{
+	-fx-background-color: red;
+	-fx-text-fill: red;
+}
+
+
