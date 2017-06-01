@@ -3,7 +3,11 @@ package controller;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
+import java.util.Set;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -70,6 +74,43 @@ public class Controller implements Initializable{
 
 	public void restartGame() {
 		game.startGame();
+		progressBarMe.setProgress(1);
+		progressBarEnemy.setProgress(1);
+
+		//set enemy fields
+		List<Node> buttons = enemyField.getChildren()
+		.stream()
+		.filter(b -> b instanceof Button)
+		.collect(Collectors.toList());
+
+		for (int y = 0; y < 5; y++) {
+			for (int x = 0; x < 5; x++) {
+				String xy = ""+x+y;
+				State state = game.getEnemyMap().getField(new XY(x,y)).getState();
+				buttons.stream()
+				.filter(b -> ((Button)b).getText().endsWith(xy))
+				.forEach(b -> {
+					b.setId(state.toString());
+					b.setDisable(false);
+				});
+			}
+		}
+
+		//set my fields
+		List<Node> buttons2 = myField.getChildren()
+		.stream()
+		.filter(b -> b instanceof Button)
+		.collect(Collectors.toList());
+
+		for (int y = 0; y < 5; y++) {
+			for (int x = 0; x < 5; x++) {
+				String xy = ""+x+y;
+				State state = game.getMyMap().getField(new XY(x,y)).getState();
+				buttons2.stream()
+				.filter(b -> ((Button)b).getText().endsWith(xy))
+				.forEach(b -> b.setId(state.toString()));
+			}
+		}
 
 
 	}
@@ -106,14 +147,11 @@ public class Controller implements Initializable{
 		String state = field.getState().toString();
 
 		ObservableList<Node> buttons = myField.getChildren();
-		for (int i = 0; i < buttons.size(); i++) {
-			if (buttons.get(i) instanceof Button) {
-				Button but = (Button) buttons.get(i);
-				if ((but).getText().endsWith(buttonNr)) {
-					but.setId(state);
-				}
-			}
-		}
+		buttons.stream()
+		.filter(b -> b instanceof Button)
+		.filter(b -> ((Button)b).getText().endsWith(buttonNr))
+		.forEach(b -> b.setId(state));
+
 	}
 
 	private void setEnemyField(Field field) {
@@ -132,16 +170,14 @@ public class Controller implements Initializable{
 		String state = field.getState().toString();
 
 		ObservableList<Node> buttons = enemyField.getChildren();
-		for (int i = 0; i < buttons.size(); i++) {
-			if (buttons.get(i) instanceof Button) {
-				Button but = (Button) buttons.get(i);
-				if ((but).getText().endsWith(buttonNr)) {
-					but.setDisable(true);
-					but.setId(state);
-				}
-			}
-		}
 
+		buttons.stream()
+		.filter(b -> b instanceof Button)
+		.filter(b -> ((Button)b).getText().endsWith(buttonNr))
+		.forEach(b -> {
+			b.setId(state);
+			b.setDisable(true);
+		});
 
 	}
 

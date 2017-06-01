@@ -43,7 +43,7 @@ public class Game {
 		startGame();
 	}
 
-	void startGame() {
+	public void startGame() {
 
 		myMap = new Map(State.EMPTY);
 		me = new Player(myMap);

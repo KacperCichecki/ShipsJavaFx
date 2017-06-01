@@ -1,6 +1,33 @@
 .root{
+	-fx-text-fill: white;
 	-fx-background-color: #003d35;
 }
+
+#myMenuBar{
+	-fx-background-color: #225e57;
+	-fx-font-size: 14px;
+	-fx-border-width: 1;
+  	-fx-border-color: grey;
+}
+
+.context-menu {
+    -fx-background-color: #225e57;
+}
+
+#myMenu{
+	-fx-background-color: #445e57;
+	-fx-font-weight: bold;
+}
+
+#menuItem{
+	-fx-background-color: #225e57;
+	-fx-font-size: 14px;
+}
+
+#menuItem:hover{
+	-fx-background-color: #445e57;
+}
+
 
 #popup{
 	-fx-background-color: #F0FFFF;
@@ -10,18 +37,17 @@
 
 #okButton{
 	-fx-background-color: #6495ED;
-	-fx-text-fill: #F0FFFF;
+	-fx-text-fill: white;
 }
 
 #popLabel{
 	-fx-text-alignment: center;
-	-fx-text-fill: #2F4F4F;
-	-fx-font-weight: bold;
 	-fx-font-size: 25px;
+	-fx-font-weight: bold;
 	-fx-padding: 30px;
 }
 
-.label{
+.myLabel{
 	-fx-text-fill: #F0F8FF;
 	-fx-font-weight: bold;
 	-fx-font-size: 20px;
@@ -55,6 +81,16 @@
 #HIT{
 	-fx-background-color: red;
 	-fx-text-fill: red;
+}
+
+#EMPTY{
+	-fx-background-color: #00ffdd;
+	-fx-text-fill:  #00ffdd;
+}
+
+#ENEMYEMPTY{
+	-fx-background-color: #00ffdd;
+	-fx-text-fill:  #00ffdd;
 }
 
 

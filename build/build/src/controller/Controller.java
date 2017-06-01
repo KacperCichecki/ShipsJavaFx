@@ -2,14 +2,22 @@ package controller;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.net.URL;
+import java.util.List;
+import java.util.ResourceBundle;
+import java.util.Set;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Popup;
@@ -19,12 +27,15 @@ import model.Game;
 import model.State;
 import model.XY;
 
-public class Controller {
+public class Controller implements Initializable{
 
 	Game game = new Game();
 
 	@FXML
 	private GridPane enemyField;
+
+	@FXML
+	private ProgressBar progressBarMe, progressBarEnemy;
 
 	@FXML
 	private Button eneButton00, eneButton10, eneButton20, eneButton30, eneButton40;
@@ -55,6 +66,59 @@ public class Controller {
 	private int centerX = screenSize.width / 2;
 	private int centerY = screenSize.height / 2;
 
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		progressBarMe.setProgress(1);
+		progressBarEnemy.setProgress(1);
+	}
+
+	public void restartGame() {
+		game.startGame();
+		progressBarMe.setProgress(1);
+		progressBarEnemy.setProgress(1);
+
+		//set enemy fields
+		List<Node> buttons = enemyField.getChildren()
+		.stream()
+		.filter(b -> b instanceof Button)
+		.collect(Collectors.toList());
+
+		for (int y = 0; y < 5; y++) {
+			for (int x = 0; x < 5; x++) {
+				String xy = ""+x+y;
+				State state = game.getEnemyMap().getField(new XY(x,y)).getState();
+				buttons.stream()
+				.filter(b -> ((Button)b).getText().endsWith(xy))
+				.forEach(b -> {
+					b.setId(state.toString());
+					b.setDisable(false);
+				});
+			}
+		}
+
+		//set my fields
+		List<Node> buttons2 = myField.getChildren()
+		.stream()
+		.filter(b -> b instanceof Button)
+		.collect(Collectors.toList());
+
+		for (int y = 0; y < 5; y++) {
+			for (int x = 0; x < 5; x++) {
+				String xy = ""+x+y;
+				State state = game.getMyMap().getField(new XY(x,y)).getState();
+				buttons2.stream()
+				.filter(b -> ((Button)b).getText().endsWith(xy))
+				.forEach(b -> b.setId(state.toString()));
+			}
+		}
+
+
+	}
+
+	public void showGameInfo() {
+
+	}
+
 	public void hitField(ActionEvent e) {
 		Button button = (Button) e.getSource();
 		int number = Integer.parseInt(button.getText());
@@ -69,6 +133,8 @@ public class Controller {
 
 	private void setMyField(Field field) {
 		if(field.getState() == State.HIT){
+			int points = game.getEnemy().getPoints();
+			progressBarMe.setProgress((double)(4 - points) /4);
 			if(game.getEnemy().getPoints() == 4){
 				showAnnouncement("YOU LOST\n\n learn how to play!");
 			}
@@ -81,19 +147,18 @@ public class Controller {
 		String state = field.getState().toString();
 
 		ObservableList<Node> buttons = myField.getChildren();
-		for (int i = 0; i < buttons.size(); i++) {
-			if (buttons.get(i) instanceof Button) {
-				Button but = (Button) buttons.get(i);
-				if ((but).getText().endsWith(buttonNr)) {
-					but.setId(state);
-				}
-			}
-		}
+		buttons.stream()
+		.filter(b -> b instanceof Button)
+		.filter(b -> ((Button)b).getText().endsWith(buttonNr))
+		.forEach(b -> b.setId(state));
+
 	}
 
 	private void setEnemyField(Field field) {
 		if(field.getState() == State.ENEMYHIT){
-			if(game.getMe().getPoints() == 4){
+			int points = game.getMe().getPoints();
+			progressBarEnemy.setProgress((double)(4 - points) /4);
+			if( points == 4){
 				showAnnouncement("YOU WON\n\n Congratulation!");
 			}
 		}
@@ -105,21 +170,19 @@ public class Controller {
 		String state = field.getState().toString();
 
 		ObservableList<Node> buttons = enemyField.getChildren();
-		for (int i = 0; i < buttons.size(); i++) {
-			if (buttons.get(i) instanceof Button) {
-				Button but = (Button) buttons.get(i);
-				if ((but).getText().endsWith(buttonNr)) {
-					but.setDisable(true);
-					but.setId(state);
-				}
-			}
-		}
 
+		buttons.stream()
+		.filter(b -> b instanceof Button)
+		.filter(b -> ((Button)b).getText().endsWith(buttonNr))
+		.forEach(b -> {
+			b.setId(state);
+			b.setDisable(true);
+		});
 
 	}
 
 	// show Pop up window with custom text
-	public void showAnnouncement(String message) {
+	private void showAnnouncement(String message) {
 
 		Toolkit.getDefaultToolkit().beep();
 		Stage stage = (Stage) enemyField.getScene().getWindow();
@@ -145,4 +208,5 @@ public class Controller {
 		popup.getContent().addAll(layout1);
 		popup.show(stage);
 	}
+
 }
