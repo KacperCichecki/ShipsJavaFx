@@ -2,14 +2,18 @@ package controller;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.net.URL;
+import java.util.ResourceBundle;
 
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Popup;
@@ -19,12 +23,15 @@ import model.Game;
 import model.State;
 import model.XY;
 
-public class Controller {
+public class Controller implements Initializable{
 
 	Game game = new Game();
 
 	@FXML
 	private GridPane enemyField;
+
+	@FXML
+	private ProgressBar progressBarMe, progressBarEnemy;
 
 	@FXML
 	private Button eneButton00, eneButton10, eneButton20, eneButton30, eneButton40;
@@ -55,6 +62,22 @@ public class Controller {
 	private int centerX = screenSize.width / 2;
 	private int centerY = screenSize.height / 2;
 
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		progressBarMe.setProgress(1);
+		progressBarEnemy.setProgress(1);
+	}
+
+	public void restartGame() {
+		game.startGame();
+
+
+	}
+
+	public void showGameInfo() {
+
+	}
+
 	public void hitField(ActionEvent e) {
 		Button button = (Button) e.getSource();
 		int number = Integer.parseInt(button.getText());
@@ -69,6 +92,8 @@ public class Controller {
 
 	private void setMyField(Field field) {
 		if(field.getState() == State.HIT){
+			int points = game.getEnemy().getPoints();
+			progressBarMe.setProgress((double)(4 - points) /4);
 			if(game.getEnemy().getPoints() == 4){
 				showAnnouncement("YOU LOST\n\n learn how to play!");
 			}
@@ -93,7 +118,9 @@ public class Controller {
 
 	private void setEnemyField(Field field) {
 		if(field.getState() == State.ENEMYHIT){
-			if(game.getMe().getPoints() == 4){
+			int points = game.getMe().getPoints();
+			progressBarEnemy.setProgress((double)(4 - points) /4);
+			if( points == 4){
 				showAnnouncement("YOU WON\n\n Congratulation!");
 			}
 		}
@@ -119,7 +146,7 @@ public class Controller {
 	}
 
 	// show Pop up window with custom text
-	public void showAnnouncement(String message) {
+	private void showAnnouncement(String message) {
 
 		Toolkit.getDefaultToolkit().beep();
 		Stage stage = (Stage) enemyField.getScene().getWindow();
@@ -145,4 +172,5 @@ public class Controller {
 		popup.getContent().addAll(layout1);
 		popup.show(stage);
 	}
+
 }

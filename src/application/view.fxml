@@ -8,7 +8,17 @@
 
 <AnchorPane prefHeight="320.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Controller">
    <children>
-      <Label alignment="CENTER" layoutX="14.0" layoutY="42.0" prefHeight="28.0" prefWidth="200.0" text="My ships" textAlignment="CENTER">
+      <MenuBar id="myMenuBar" layoutY="2.0" minHeight="-Infinity" minWidth="-Infinity" prefWidth="500.0">
+        <menus>
+          <Menu mnemonicParsing="false" text="Game">
+            <items>
+              <MenuItem id="menuItem" fx:id="restartGame" mnemonicParsing="false" onAction="#restartGame" text="restart" />
+                  <MenuItem id="menuItem" fx:id="info" mnemonicParsing="false" onAction="#showGameInfo" text="info" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+      <Label alignment="CENTER" layoutX="14.0" layoutY="42.0" prefHeight="28.0" prefWidth="200.0" styleClass="myLabel" text="My ships" textAlignment="CENTER">
          <font>
             <Font size="20.0" />
          </font>
@@ -56,7 +66,7 @@
             <Button fx:id="button22" disable="true" layoutX="130.0" layoutY="130.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" text="22" GridPane.columnIndex="2" GridPane.rowIndex="2" />
          </children>
       </GridPane>
-      <Label alignment="CENTER" layoutX="281.0" layoutY="42.0" prefHeight="28.0" prefWidth="200.0" text="Enemy ships" textAlignment="CENTER">
+      <Label alignment="CENTER" layoutX="281.0" layoutY="42.0" prefHeight="28.0" prefWidth="200.0" styleClass="myLabel" text="Enemy ships" textAlignment="CENTER">
          <font>
             <Font size="20.0" />
          </font>
@@ -104,5 +114,7 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
          </rowConstraints>
       </GridPane>
+      <ProgressBar id="porgresBarMe" fx:id="progressBarMe" layoutX="14.0" layoutY="72.0" prefWidth="200.0" progress="0.0" styleClass="porgresBar" />
+      <ProgressBar id="porgresBarEnemy" fx:id="progressBarEnemy" layoutX="281.0" layoutY="72.0" prefWidth="200.0" progress="0.0" styleClass="porgresBar" />
    </children>
 </AnchorPane>
