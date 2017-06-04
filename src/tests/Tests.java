@@ -7,6 +7,7 @@ import java.util.Arrays;
 
 import org.junit.Test;
 
+import model.Enemy;
 import model.Field;
 import model.Game;
 import model.Map;
@@ -44,8 +45,8 @@ public class Tests {
 		Game game = new Game();
 
 		Map map = game.getMe().getMap();
-		State resultState1 = map.getField(3, 1).getState();
-		State resultState2 = map.getField(3, 2).getState();
+		State resultState1 = map.getField(1, 1).getState();
+		State resultState2 = map.getField(1, 2).getState();
 		assertTrue(resultState1 == State.SHIP);
 		assertTrue(resultState2 == State.SHIP);
 
@@ -55,7 +56,7 @@ public class Tests {
 	public void testDrawShip() {
 		Map map = new Map(State.ENEMYEMPTY);
 
-		Player player = new Player(map);
+		Enemy player = new Enemy(map);
 		Ship[] ships = player.drawShip();
 		System.out.println(Arrays.toString(ships));
 		assertTrue(!ships[0].equals(ships[1]));

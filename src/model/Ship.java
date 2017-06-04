@@ -4,14 +4,23 @@ import java.util.Arrays;
 
 public class Ship {
 
-	private int hp = 2;
-	private final XY[] xy = new XY[2] ;
+	private int hp = 0;
+	private XY[] xy;
 
 
 	public Ship(XY xy1, XY xy2) {
-
+		this.hp = 2;
+		xy = new XY[2];
 		xy[0] = xy1;
 		xy[1] = xy2;
+	}
+
+	public Ship(XY xy1, XY xy2, XY xy3) {
+		this.hp = 3;
+		xy = new XY[3];
+		xy[0] = xy1;
+		xy[1] = xy2;
+		xy[2] = xy3;
 	}
 
 	public XY getXY(int i) {
@@ -48,7 +57,4 @@ public class Ship {
 		}
 		return true;
 	}
-
-
-
 }

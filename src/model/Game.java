@@ -2,8 +2,8 @@ package model;
 
 public class Game {
 
-	private Player me;
-	private Player enemy;
+	private Me me;
+	private Enemy enemy;
 	private Map myMap;
 	private Map enemyMap;
 
@@ -11,7 +11,7 @@ public class Game {
 		return me;
 	}
 
-	public void setMe(Player me) {
+	public void setMe(Me me) {
 		this.me = me;
 	}
 
@@ -19,7 +19,7 @@ public class Game {
 		return enemy;
 	}
 
-	public void setEnemy(Player enemy) {
+	public void setEnemy(Enemy enemy) {
 		this.enemy = enemy;
 	}
 
@@ -46,27 +46,32 @@ public class Game {
 	public void startGame() {
 
 		myMap = new Map(State.EMPTY);
-		me = new Player(myMap);
+		me = new Me(myMap);
 
 		XY xy1 = new XY(1, 1);
 		XY xy2 = new XY(1, 2);
 		XY xy3 = new XY(3, 3);
 		XY xy4 = new XY(4, 3);
+		XY xy5 = new XY(4, 6);
+		XY xy6 = new XY(5, 6);
+		XY xy7 = new XY(6, 6);
 
 		Ship ship1 = new Ship(xy1, xy2);
 		Ship ship2 = new Ship(xy3, xy4);
+		Ship ship3 = new Ship(xy5, xy6, xy7);
 
 		myMap.setShip(ship1, 0, State.SHIP);
 		myMap.setShip(ship2, 1, State.SHIP);
+		myMap.setShip(ship3, 2, State.SHIP);
 
 		enemyMap = new Map(State.ENEMYEMPTY);
-		enemy = new Player(enemyMap);
+		enemy = new Enemy(enemyMap);
 
 		enemy.drawShip();
 	}
 
-	// return fields hit by me and enemy, first field is enemy's field and
-	// second is mine
+	// return fields which were hit by me and enemy,
+	//first field is enemy's field and second is mine
 	public Field[] nextRound(XY xy) {
 		Field[] fields = new Field[2];
 
@@ -76,9 +81,6 @@ public class Game {
 
 		if (afterMyShot == State.ENEMYHIT) {
 			System.out.println("I have points: " + me.getPoints());
-			if (me.getPoints() == 4) {
-				endGame("You have won!");
-			}
 		}
 
 		fields[1] = enemy.hitMe(me);
@@ -87,16 +89,7 @@ public class Game {
 
 		if (afterEnemyShot == State.HIT) {
 			System.out.println("Enemy have points: " + enemy.getPoints());
-			if (enemy.getPoints() == 4) {
-				endGame("Computer has won!");
-			}
 		}
-
 		return fields;
 	}
-
-	private void endGame(String winner) {
-
-	}
-
 }
