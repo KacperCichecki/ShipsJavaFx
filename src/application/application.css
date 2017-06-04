@@ -51,10 +51,10 @@
 	-fx-padding: 30px;
 }
 
-#popLabel{
-	-fx-text-alignment: center;
+#popLabe2{
+	-fx-text-alignment: left ;
 	-fx-font-size: 15px;
-	-fx-padding: 30px;
+	-fx-padding: 20px;
 }
 
 .myLabel{
