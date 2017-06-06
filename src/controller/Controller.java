@@ -117,7 +117,8 @@ public class Controller implements Initializable {
 	}
 
 	// show program info
-	public void showGameInfo() {
+	@FXML
+	private void showGameInfo() {
 		if (stage == null) {
 			stage = (Stage) enemyField.getScene().getWindow();
 		}
@@ -130,7 +131,8 @@ public class Controller implements Initializable {
 
 	// hit enemy's field with given number then set fields (enemy and my) with
 	// results
-	public void hitField(ActionEvent e) {
+	@FXML
+	private void hitField(ActionEvent e) {
 		Button button = (Button) e.getSource();
 		int number = Integer.parseInt(button.getText());
 		int x = number / 10;
