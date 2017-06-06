@@ -1,5 +1,5 @@
 # ShipsJavaFx
-Simple battleships game made in JavaFx
+Simple battleships game made in JavaFx <br>
 Technology used: Java SE, JavaFX, CSS, FXML,
 
 download runnable jar: https://github.com/KacperCichecki/ShipsJavaFx/blob/master/build/deploy/ShipsJavaFx.jar <br>
