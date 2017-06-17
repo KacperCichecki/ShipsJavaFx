@@ -157,7 +157,7 @@
             <Button fx:id="eButton73" layoutX="220.0" layoutY="70.0" mnemonicParsing="false" onAction="#hitField" prefHeight="50.0" prefWidth="50.0" text="73" GridPane.columnIndex="7" GridPane.rowIndex="3" />
             <Button fx:id="eButton54" layoutX="160.0" layoutY="100.0" mnemonicParsing="false" onAction="#hitField" prefHeight="50.0" prefWidth="50.0" text="54" GridPane.columnIndex="5" GridPane.rowIndex="4" />
             <Button fx:id="eButton64" layoutX="220.0" layoutY="100.0" mnemonicParsing="false" onAction="#hitField" prefHeight="50.0" prefWidth="50.0" text="64" GridPane.columnIndex="6" GridPane.rowIndex="4" />
-            <Button fx:id="eButton67" layoutX="190.0" layoutY="100.0" mnemonicParsing="false" onAction="#hitField" prefHeight="50.0" prefWidth="50.0" text="67" GridPane.columnIndex="7" GridPane.rowIndex="4" />
+            <Button fx:id="eButton67" layoutX="190.0" layoutY="100.0" mnemonicParsing="false" onAction="#hitField" prefHeight="50.0" prefWidth="50.0" text="74" GridPane.columnIndex="7" GridPane.rowIndex="4" />
             <Button fx:id="eButton05" layoutX="220.0" layoutY="130.0" mnemonicParsing="false" onAction="#hitField" prefHeight="50.0" prefWidth="50.0" text="05" GridPane.rowIndex="5" />
             <Button fx:id="eButton15" layoutX="190.0" layoutY="130.0" mnemonicParsing="false" onAction="#hitField" prefHeight="50.0" prefWidth="50.0" text="15" GridPane.columnIndex="1" GridPane.rowIndex="5" />
             <Button fx:id="eButton25" layoutX="160.0" layoutY="130.0" mnemonicParsing="false" onAction="#hitField" prefHeight="50.0" prefWidth="50.0" text="25" GridPane.columnIndex="2" GridPane.rowIndex="5" />
